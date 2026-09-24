@@ -9,10 +9,9 @@ Use a critic after the first coherent build, when the visual direction is not su
 The critic must run in a fresh context. Give it only:
 
 - the product goal;
-- the target audience;
-- the platform and relevant constraints;
-- a screenshot of the current interface; and
-- optional visual references.
+- a screenshot of the current interface;
+- the platform and relevant constraints; and
+- an optional moodboard.
 
 Do not provide code, implementation cost, earlier criticism, the designer's rationale, or a target score. Those inputs anchor the critic to explanations instead of visible evidence.
 
@@ -21,15 +20,15 @@ The screenshot must represent a real viewport and state, at a useful resolution.
 ## Critic prompt
 
 ```text
-Act as an independent product-design critic. Review only the supplied goal,
-audience, platform constraints, screenshot, and optional references.
+Act as an independent product-design critic. Review only the supplied product
+goal, current interface screenshot, platform and relevant constraints, and
+optional moodboard.
 
 Assess the visible composition, hierarchy, typography, color, material, imagery,
 coherence, product clarity, and accessibility signals. Identify overdone, stale,
-or recognizably AI-generated patterns. When references are supplied, name the
-largest visible quality gap between the current work and that professional
-baseline. Judge only what the evidence shows; do not infer implementation intent
-or behavior.
+or recognizably AI-generated patterns. When a moodboard is supplied, name the
+largest visible quality gap between the current work and that baseline. Judge only
+what the evidence shows; do not infer implementation intent or behavior.
 
 Return:
 1. Intended aesthetic — what the interface appears to be trying to achieve.
@@ -41,7 +40,8 @@ Return:
    accessibility behavior that the supplied material cannot confirm, write
    "not observable from supplied evidence" and name the video, multi-state or
    breakpoint screenshots, or interaction checks needed to verify it. Do not guess.
-5. Specific next changes — concrete revisions tied to the observed gaps.
+5. Specific next changes — exactly three concrete revisions, ranked by priority,
+   with each revision explicitly tied to an observed gap.
 6. Production risks — visible usability or delivery risks, clearly separated from
    the unverified risks above.
 7. Quality signal — 1–10, supported by visible evidence rather than taste alone.
