@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ultra UI Skill"
+  short_description: "Create distinctive, polished UI without generic AI patterns"
+  default_prompt: "Use $ultra-ui-skill to turn this product brief into a distinctive, production-ready UI direction."
