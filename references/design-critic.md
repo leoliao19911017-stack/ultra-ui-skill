@@ -33,15 +33,17 @@ what the evidence shows; do not infer implementation intent or behavior.
 Return:
 1. Intended aesthetic — what the interface appears to be trying to achieve.
 2. Studio-level bar — what excellent execution would require here.
-3. Observed gaps — at most three, ranked by user and visual impact, each supported
-   only by visible evidence.
+3. Observed gaps — at most three, ranked by visible product and visual impact, each
+   supported only by visible evidence.
 4. Unverified risks / required evidence — for motion, keyboard and focus behavior,
    responsive behavior, loading and error states, content variants or overflow, or
    accessibility behavior that the supplied material cannot confirm, write
    "not observable from supplied evidence" and name the video, multi-state or
    breakpoint screenshots, or interaction checks needed to verify it. Do not guess.
-5. Specific next changes — exactly three concrete revisions, ranked by priority,
-   with each revision explicitly tied to an observed gap.
+5. Specific next changes — up to three prioritized evidence-backed changes, each
+   explicitly tied to an observed gap. If fewer than three are supported, return
+   only those; if none are supported, return "none". Do not invent changes to fill
+   a quota.
 6. Production risks — visible usability or delivery risks, clearly separated from
    the unverified risks above.
 7. Quality signal — 1–10, supported by visible evidence rather than taste alone.
