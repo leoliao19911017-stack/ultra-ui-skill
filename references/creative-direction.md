@@ -14,7 +14,7 @@ If the user has already selected a direction, deepen and validate it instead of 
 
 ### Optional seed string
 
-Use a long random alphanumeric string only when familiar patterns keep pulling the work toward the default distribution. Generate it locally, then privately extract possible segmentation, repetition, numeric emphasis, or rhythm. The string is an inspiration constraint—not content—and must never appear in the product or be shown to the user.
+Use a long random seed string only when familiar patterns keep pulling the work toward the default distribution. Generate it locally, then privately extract possible segmentation, repetition, numeric emphasis, or rhythm. The seed is an inspiration constraint, not product content: it must not enter the interface, copy, data, or any default deliverable. Keep it private by default; provide it only when the user explicitly asks for it or when an authorized audit or reproduction workflow requires it.
 
 PowerShell (optional):
 
@@ -25,7 +25,7 @@ PowerShell (optional):
 POSIX (optional):
 
 ```sh
-LC_ALL=C tr -dc 'A-Za-z0-9' </dev/urandom | head -c 64; printf '\n'
+od -An -N32 -tx1 /dev/urandom | tr -d ' \n'; printf '\n'
 ```
 
 ### Cross-domain inspiration
