@@ -12,12 +12,31 @@ A practical workflow for steering generic, template-like AI interface output tow
 
 The skill is framework-, model-, and vendor-agnostic. It guides design judgment; it does not replace user research, accessibility testing, or production validation.
 
+## Visual case study
+
+Mosaic follows one fictional product from design direction through product proof to a continuous interaction sequence.
+
+![Mosaic art-direction board defining the editorial evidence desk visual system](assets/showcase/01-direction-board.png)
+
+*Direction definition: the visual thesis, palette, typography, layout grammar, and explicit avoidances establish a shared design brief.*
+
+![Mosaic landing page showing the Sources, Reconcile, and Shared View product journey](assets/showcase/02-landing-page.png)
+
+*Landing-page product proof: a concrete renewal-risk scenario demonstrates the product journey instead of relying on decorative UI.*
+
+![Mosaic interaction sequence showing source inspection, conflict resolution, and publishing](assets/showcase/03-interaction-sequence.png)
+
+*Continuous interaction states: one product surface progresses from source inspection through conflict resolution to a published decision view.*
+
+> Mosaic is a fictional product. These are generated concept renders illustrating the Ultra UI Skill workflow, not production screenshots or evidence of guaranteed output quality.
+
 ## Repository structure
 
 ```text
 ultra-ui-skill/
 |-- SKILL.md                  Skill entrypoint and workflow router
 |-- agents/openai.yaml        Codex UI metadata
+|-- assets/showcase/          Generated Mosaic concept renders
 |-- references/               Creative direction, critic, and anti-AI guidance
 |-- evals/                    Baseline, with-skill results, and a visual fixture
 |-- README.md
