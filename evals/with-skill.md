@@ -5,20 +5,30 @@
 - 运行日期：2026-09-24
 - 场景 A：`/root/eval_with_skill_a`，`fork_turns: none`
 - 场景 B：`/root/eval_with_skill_b`，`fork_turns: none`
-- 场景 C：`/root/eval_with_skill_c`，`fork_turns: none`
+- 场景 C：`/root/eval_with_skill_c2`，`fork_turns: none`
 - Skill 绝对路径：`D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill`
 - 模型/推理配置：评估任务和输出未暴露具体模型或推理等级，因此不作推断。
-- 隔离说明：三个 evaluator 都在全新上下文中获得上述 Skill 路径。以下记录来自三个 evaluator 的单次输出；没有重新运行场景。
+- 隔离说明：以下记录来自三个 evaluator 的单次输出；本文件的修正没有重新运行场景。
 
 这些结果只验证本次提示与上下文中的可观察行为，不能证明未来运行必然相同，也不能仅凭文字方案证明最终视觉质量或生产实现质量。
+
+## Evaluation harness
+
+三个计入结论的 evaluator 都收到以下共享要求：
+
+- 使用 `fork_turns: none` 在全新上下文中运行。
+- 先完整读取 `D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill\SKILL.md`，再按其中路由只读取当前任务所需的 reference。
+- 禁止使用浏览器、CUA 或网络，也禁止修改文件。
+- 不得读取实现计划、`evals/baseline.md` 或 `evals/with-skill.md`。
+- 最后提供 `Evaluation trace`，列明实际读取的 Skill 文件、未读取的材料、所用本地工具和副作用边界。
+
+这些是 evaluator 实际收到的共享约束。下面的 `Prompt` 只记录各场景的业务或评审任务，不把未实际发送的统一调用句伪装成逐字提示。
 
 ## 场景 A：探索真正不同的 B2B SaaS 落地页方向
 
 ### Prompt
 
-> Use `$ultra-ui-skill` at `D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill` to complete this request. Follow the skill, and state the concrete design decisions you made.
->
-> 为面向运营团队的 B2B SaaS 数据协作产品探索高级、现代、有辨识度的落地页方向。产品的核心任务是把分散数据整理成可共享决策视图。先探索不同方向，再推荐一个落地方向。
+以下是业务任务的忠实摘要，不标作逐字引文：为面向运营团队的 B2B SaaS 数据协作产品探索高级、现代、有辨识度的落地页方向；产品的核心任务是把分散数据整理成可共享决策视图；先探索，再推荐一个方向。提示没有直接点名任何具体视觉问题或预设候选方向。
 
 ### Observed behavior
 
@@ -53,9 +63,7 @@ Evaluator 记录其读取了 `SKILL.md` 与 `references/creative-direction.md`�
 
 ### Prompt
 
-> Use `$ultra-ui-skill` at `D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill` to complete this request. Follow the skill, and state the concrete design decisions you made.
->
-> 请提升一个移动端健康应用的高级感。当前界面使用发光背景、多彩渐变、多个状态标签、每个模块一个圆角卡片，并在每张卡片下写了说明文案。请给出具体改版方案。
+> 请改进一个移动端健康应用的首页。当前页面有发光背景、大面积渐变、很多彩色文字高亮、每个模块都有标签、十二张圆角卡片、顶部大段说明文案，以及自定义底部导航。目标是更可信、更安静、更容易每天使用。请给出改版方案。
 
 ### Observed behavior
 
@@ -74,7 +82,7 @@ Evaluator 记录其读取了 `SKILL.md` 与 `references/anti-ai-tells.md`；由�
 
 ### Pass/Fail
 
-**PASS** — 输出先删去或收敛低价值装饰和重复包装，再提出与任务、可信度和状态处理直接相关的新增内容，并逐项解释了删除理由。
+**PASS** — 输入已经直接点名待处理元素；本次通过只证明 evaluator 按 Skill 先做减法、解释保留与删除的取舍，再围绕每日使用任务重建信息层级。它不证明 evaluator 主动发现了这些视觉问题。
 
 ### Evidence
 
@@ -85,44 +93,54 @@ Evaluator 记录其读取了 `SKILL.md` 与 `references/anti-ai-tells.md`；由�
 
 ### Remaining gap
 
-输入已经点名发光、渐变、标签、卡片和说明文案，为识别问题提供了强线索；本次结果不能证明在没有这些线索时仍会主动发现同类问题。输出是文字改版方案，没有针对真实界面的截图验证、交互测试或医疗内容审查。
+输入直接点名发光、渐变、彩色高亮、标签、十二张卡片、顶部说明和自定义导航，因此本次结果不能证明 evaluator 在没有这些线索时仍会主动发现同类问题。输出是文字改版方案，没有针对真实界面的截图验证、交互测试或医疗内容审查。
 
-## 场景 C：在隔离视觉上下文中评审 Orbit 首屏
+## 场景 C：在隔离视觉上下文中评审 Orbit AI 研究助手首屏
 
 ### Prompt
 
-> Use `$ultra-ui-skill` at `D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill` to complete this request. Follow the skill, and state the concrete design decisions you made.
->
-> 作为独立产品设计 critic，只根据产品目标、桌面 Web 首屏约束和当前 `orbit-hero.svg` 的视觉结果评审 Orbit SaaS 首屏。Orbit 应帮助 B2B 团队理解客户活动并判断哪些账户值得优先处理。不要读取实现代码、设计理由、历史批评、目标分数、实现计划、baseline 或其他评测文件。指出最重要的可见差距，并为下一轮设定明确边界和停止条件。
+场景使用 `/root/eval_with_skill_c2`。任务要求把 Orbit 作为 AI 研究助手评审，目标工作流是从问题走向有引用依据的结论；只评审 1440×900 桌面首屏：
+
+- 视觉 fixture：`D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill\evals\fixtures\orbit-hero.svg`
+- 预期 SHA-256：`2FF68518528503562884E0D2FE3EC2BDC7C718D3E047C308320061AE20974649`
+- 禁止读取 SVG 源码，只能使用本地图像查看；如直接查看不可用，可以在内存中转换后查看。
+- 评审可见结果，指出主要差距、优先修改、静态证据无法验证的项目，并为下一轮设置硬边界和停止条件。
 
 ### Observed behavior
 
-Evaluator 在隔离上下文中只接收产品目标、桌面 Web 首屏约束和当前视觉输入。它把界面意图识别为克制、可信、略带未来感的研究智能工作台，并列出恰好三项有可见证据支持的主要差距：
+Evaluator 核对 fixture 哈希与预期值一致，用本地 Node.js 和 Sharp 在内存中渲染后查看，并给出 `7/10`。它列出恰好三项有可见证据支持的主要差距：
 
-1. 产品叙事指向 AI 研究工具，与 B2B 客户活动和账户优先级产品目标明显错位。
-2. 核心产品视觉展示研究与验证，却没有展示账户、近期活动、意向信号、风险、优先级或下一步动作。
-3. CTA 任务语言不一致，社会证明和次级文字的可读性与受众定位也不统一。
+1. 右侧以 `EVIDENCE MAP`、`CLAIM VERIFIED`、`3 independent sources` 和 `98% confidence` 等标签宣称可信，但看不到具名来源，也看不到证据如何支持结论。
+2. `Go deeper. Know sooner.` 过于泛化；“AI research assistant” 类别与 `question → cited conclusion` 工作流没有进入首层信息。
+3. 产品模型的小字对比度偏弱，通用深色 AI SaaS hero 外壳强于 Orbit 专属的研究关系语言。
 
-它把动效、键盘与焦点、响应式、加载与错误状态、真实内容溢出、屏幕阅读器语义和精确对比度明确列入 `not observable from supplied evidence`，没有把这些行为推断为已通过或失败。下一轮被限制为产品叙事、账户优先级产品证据、CTA 与可读性这三项；保持同一桌面视口、首屏范围和 critic 问题，不扩展到页脚、定价、移动端实现或无关视觉重塑。默认最多两轮，满足产品可识别、叙事一致、产品模型含可理解信号/原因/动作、无高优先级可见可用性问题后即可提前停止；继续迭代需要新的明确授权。
+它提出三项对应修改：把产品演示改成可检查的 `问题 → 3 个具名来源 → 关键证据/支持关系 → 带行内引用的结论`；在首层明确产品类别和工作流；放大证据内容，削减重复 badge、胶囊和装饰容器。
 
-Evaluator 记录其读取了 `SKILL.md`、`references/design-critic.md` 和 `references/anti-ai-tells.md`，未读取 SVG 源码、实现代码、设计理由、实现计划、baseline 或本文件。由于本地图像查看器不能直接解码 SVG，Evaluator 使用本地 `sharp` 在内存中渲染后查看；没有使用浏览器、CUA 或网络，也没有产生文件修改。
+它把动效、交互、键盘与焦点、响应式、加载与错误状态、真实内容溢出、屏幕阅读器语义、精确对比度和性能单列为静态证据无法验证的项目，没有推断为已通过或失败。下一轮只处理价值主张、证据链及关键文字尺寸与对比度，固定相同 1440×900 视口；默认最多两轮。当首层能明确产品类别和工作流、至少一条完整证据链可读、关键研究内容不再依赖弱对比小字、且没有高优先级可见问题时提前停止。两轮后仍有差距则报告并停止，继续需要明确授权。
+
+Evaluation trace 记录其读取了 `SKILL.md`、`references/design-critic.md` 和 `references/anti-ai-tells.md`；未读取 SVG 源码、实现代码、设计理由、实现计划、baseline 或本文件。它只使用本地 Node.js 与 Sharp 做内存渲染，未修改文件，也未使用浏览器、CUA 或网络。
 
 ### Pass/Fail
 
-**PASS** — 评审使用隔离视觉上下文，只提出三项具体且有可见证据支持的 gap，并为下一轮设定了固定范围、最多两轮的硬边界、提前停止条件和继续所需的明确授权。
+**PASS** — 评审使用与产品目标匹配的隔离视觉上下文，只提出三项具体且有可见证据支持的 gap，并为下一轮设定固定视口、固定问题范围、最多两轮的硬边界、提前停止条件和继续所需的明确授权。
 
 ### Evidence
 
-- 三项 gap 均引用可见文案、产品模型、CTA、社会证明或文字对比度作为依据。
-- 不可由静态视觉确认的行为被单独列为未验证风险，并注明所需的录屏、多断点截图、状态截图或交互检查。
-- 三项 next changes 分别对应三项 observed gaps，没有为凑数虚构修改建议。
-- 下一轮的视口、首屏范围、问题集合、最大轮数和停止条件均已明确。
-- 评审过程只做本地内存渲染与观察，没有浏览器自动化或工作树写入。
+- Fixture 哈希被核对为 `2FF68518528503562884E0D2FE3EC2BDC7C718D3E047C308320061AE20974649`，与提示给定值一致。
+- 三项 gap 分别引用可见的可信度标签、泛化标题与缺失的首层工作流、弱对比小字和通用 hero 外壳作为依据。
+- 三项 next changes 分别对应可信证据链、类别与工作流表达、证据内容可读性与容器减法，没有为凑数虚构建议。
+- 静态图不能确认的行为被单独列为未验证项。
+- 下一轮的 1440×900 视口、问题集合、最大轮数和停止条件均已明确。
+- 评审只做本地内存渲染与观察，没有读取 SVG 源码、使用浏览器自动化或写入工作树。
 
 ### Remaining gap
 
-这是对单张静态桌面首屏的单次评审。它不能验证动效、响应式、键盘、状态、内容溢出、精确对比度、性能或试用流程，也没有执行修改后的第二轮对照，因此不能证明 gap 会收敛或最终实现达到工作室级质量。
+这是对单张静态 1440×900 桌面首屏的单次评审。它不能验证动效、交互、响应式、键盘、状态、内容溢出、屏幕阅读器、精确对比度、性能或完整研究流程，也没有执行修改后的第二轮对照，因此不能证明 gap 会收敛或最终实现达到工作室级质量。
+
+## Discarded pilot
+
+旧任务 `/root/eval_with_skill_c` 把 AI 研究助手 fixture 与“B2B 客户活动和账户优先级”brief 错配，导致其评审结论受到错误产品目标污染。该 pilot 不计入本文件的 PASS 证据或最终结论；场景 C 仅指 `/root/eval_with_skill_c2`。
 
 ## 结论
 
-三个场景均按预先定义的可观察标准通过：A 产生了结构与视觉逻辑真正不同的方向；B 先做有理由的减法，再补充任务相关内容；C 使用隔离视觉评审、限制为三项可见 gap，并给出硬边界和停止条件。现有证据未发现需要修改 `SKILL.md` 或 reference 文件的实际失败。结论仍限于三个单次样本，后续真实项目、重复运行和成品验证可能暴露新的问题。
+计入结论的 A、B、C2 均按预先定义的可观察标准通过：A 在没有直接点名具体视觉问题的提示下，产生了结构与视觉逻辑真正不同的方向；B 对输入已经点名的问题按 Skill 先做有理由的减法，再重建任务层级；C2 使用与 Orbit AI 研究助手目标匹配的隔离视觉评审，限制为三项可见 gap，并给出固定范围、最多两轮和提前停止条件。现有证据未发现需要修改 `SKILL.md` 或 reference 文件的实际失败。结论仍限于三个单次样本，后续真实项目、重复运行和成品验证可能暴露新的问题。
