@@ -96,11 +96,13 @@
 
 该 fixture 是 `/root/baseline3_self_review` 在第一轮创建并用图像查看工具检查的版本化输入。
 
-### Design round Prompt（逐字）
+### Design round Prompt（逐字，路径已脱敏）
+
+以下引文仅将本机绝对路径替换为 `<skill-root>`；其他文字逐字保留。
 
 > 这是一次真实实现任务。不要读取任何 Ultra UI Skill、实现计划或现有项目文件，也不要询问更多信息。
 >
-> 为一款名为 Orbit 的 AI 研究助手设计一个高级、现代的 SaaS 落地页首屏。请把实际可视化结果创建为一个自包含 SVG 文件：D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill\evals\fixtures\orbit-hero.svg
+> 为一款名为 Orbit 的 AI 研究助手设计一个高级、现代的 SaaS 落地页首屏。请把实际可视化结果创建为一个自包含 SVG 文件：`<skill-root>\evals\fixtures\orbit-hero.svg`
 >
 > 要求 SVG 为 1440×900，包含品牌、导航、标题、副标题、CTA、核心视觉和少量可信度信息；不引用外部字体或图片。使用 apply_patch 创建文件，使用图像查看工具检查结果。此轮只完成设计并汇报，不要评审设计质量，也不要读取任何计划或 Skill。
 

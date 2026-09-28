@@ -1,11 +1,13 @@
 # Ultra UI Skill 加载后行为评估
 
+公开版本已将评估记录中的本机绝对路径替换为 `<skill-root>`；评测行为、证据与结论保持不变。
+
 ## 运行元数据
 
 - 场景 A：2026-09-24，`/root/eval_with_skill_a`，`fork_turns: none`
 - 场景 B：2026-09-24，`/root/eval_with_skill_b`，`fork_turns: none`
 - 场景 C：2026-09-28，`/root/eval_with_skill_c2`，`fork_turns: none`
-- Skill 绝对路径：`D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill`
+- Skill path：`<skill-root>`
 - 模型/推理配置：评估任务和输出未暴露具体模型或推理等级，因此不作推断。
 - 隔离说明：A/B 未重跑；C 因旧 pilot 目标错配，于 2026-09-28 以 C2 同目标重新运行一次。
 
@@ -16,7 +18,7 @@
 三个计入结论的 evaluator 都收到以下共享要求：
 
 - 使用 `fork_turns: none` 在全新上下文中运行。
-- 先完整读取 `D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill\SKILL.md`，再按其中路由只读取当前任务所需的 reference。
+- 先完整读取 `<skill-root>\SKILL.md`，再按其中路由只读取当前任务所需的 reference。
 - 禁止使用浏览器、CUA 或网络，也禁止修改文件。
 - 不得读取实现计划、`evals/baseline.md` 或 `evals/with-skill.md`。
 - 最后提供 `Evaluation trace`，列明实际读取的 Skill 文件、未读取的材料、所用本地工具和副作用边界。
@@ -100,7 +102,7 @@ Evaluator 记录其读取了 `SKILL.md` 与 `references/anti-ai-tells.md`；由�
 
 场景使用 `/root/eval_with_skill_c2`。任务要求把 Orbit 作为 AI 研究助手评审，目标工作流是从问题走向有引用依据的结论；只评审 1440×900 桌面首屏：
 
-- 视觉 fixture：`D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill\evals\fixtures\orbit-hero.svg`
+- 视觉 fixture：`<skill-root>\evals\fixtures\orbit-hero.svg`
 - 预期 SHA-256：`2FF68518528503562884E0D2FE3EC2BDC7C718D3E047C308320061AE20974649`
 - 禁止读取 SVG 源码，只能使用本地图像查看；如直接查看不可用，可以在内存中转换后查看。
 - 评审可见结果，指出主要差距、优先修改、静态证据无法验证的项目，并为下一轮设置硬边界和停止条件。

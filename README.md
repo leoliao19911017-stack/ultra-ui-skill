@@ -56,13 +56,25 @@ It may also be selected automatically when an interface risks feeling generic, t
 
 ## Validate locally
 
-On the Windows installation used to develop this repository:
+PowerShell:
 
 ```powershell
-python "C:\Users\Administrator\.codex\skills\.system\skill-creator\scripts\quick_validate.py" "$HOME\.codex\skills\ultra-ui-skill"
+$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME '.codex' }
+$validator = Join-Path $codexHome 'skills\.system\skill-creator\scripts\quick_validate.py'
+$skill = Join-Path $codexHome 'skills\ultra-ui-skill'
+python $validator $skill
 ```
 
-On another machine, replace `C:\Users\Administrator\.codex` with that machine's Codex home (the value of `CODEX_HOME`, or `~/.codex` when unset) and point the final argument at the cloned skill directory. `quick_validate.py` checks packaging and frontmatter; it does not prove design quality.
+POSIX shell:
+
+```sh
+codex_home="${CODEX_HOME:-$HOME/.codex}"
+validator="$codex_home/skills/.system/skill-creator/scripts/quick_validate.py"
+skill="$codex_home/skills/ultra-ui-skill"
+python "$validator" "$skill"
+```
+
+The validator comes from Codex's locally installed `skill-creator` system skill. It checks skill packaging and frontmatter only; it does not prove design quality.
 
 ## Evidence and limits
 
