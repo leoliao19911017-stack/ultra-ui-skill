@@ -2,13 +2,12 @@
 
 ## 运行元数据
 
-- 运行日期：2026-09-24
-- 场景 A：`/root/eval_with_skill_a`，`fork_turns: none`
-- 场景 B：`/root/eval_with_skill_b`，`fork_turns: none`
-- 场景 C：`/root/eval_with_skill_c2`，`fork_turns: none`
+- 场景 A：2026-09-24，`/root/eval_with_skill_a`，`fork_turns: none`
+- 场景 B：2026-09-24，`/root/eval_with_skill_b`，`fork_turns: none`
+- 场景 C：2026-09-28，`/root/eval_with_skill_c2`，`fork_turns: none`
 - Skill 绝对路径：`D:\Documents\六爸Leo\.worktrees\ultra-ui-skill\ultra-ui-skill`
 - 模型/推理配置：评估任务和输出未暴露具体模型或推理等级，因此不作推断。
-- 隔离说明：以下记录来自三个 evaluator 的单次输出；本文件的修正没有重新运行场景。
+- 隔离说明：A/B 未重跑；C 因旧 pilot 目标错配，于 2026-09-28 以 C2 同目标重新运行一次。
 
 这些结果只验证本次提示与上下文中的可观察行为，不能证明未来运行必然相同，也不能仅凭文字方案证明最终视觉质量或生产实现质量。
 
@@ -118,7 +117,7 @@ Evaluator 核对 fixture 哈希与预期值一致，用本地 Node.js 和 Sharp 
 
 它把动效、交互、键盘与焦点、响应式、加载与错误状态、真实内容溢出、屏幕阅读器语义、精确对比度和性能单列为静态证据无法验证的项目，没有推断为已通过或失败。下一轮只处理价值主张、证据链及关键文字尺寸与对比度，固定相同 1440×900 视口；默认最多两轮。当首层能明确产品类别和工作流、至少一条完整证据链可读、关键研究内容不再依赖弱对比小字、且没有高优先级可见问题时提前停止。两轮后仍有差距则报告并停止，继续需要明确授权。
 
-Evaluation trace 记录其读取了 `SKILL.md`、`references/design-critic.md` 和 `references/anti-ai-tells.md`；未读取 SVG 源码、实现代码、设计理由、实现计划、baseline 或本文件。它只使用本地 Node.js 与 Sharp 做内存渲染，未修改文件，也未使用浏览器、CUA 或网络。
+Evaluation trace 记录其读取了 `SKILL.md`、`references/design-critic.md` 和 `references/anti-ai-tells.md`；未读取 SVG 源码、实现代码、设计理由、实现计划、baseline 或本文件。最终成功使用本地 Node.js 与 Sharp 完成内存渲染；此前尝试的其他本地转换路径未成功，且没有文件写入、联网或其他副作用。整个过程未使用浏览器或 CUA。
 
 ### Pass/Fail
 
