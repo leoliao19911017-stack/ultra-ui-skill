@@ -30,16 +30,64 @@ Mosaic follows one fictional product from design direction through product proof
 
 > Mosaic is a fictional product. These are generated concept renders illustrating the Ultra UI Skill workflow, not production screenshots or evidence of guaranteed output quality.
 
+## The ten presets, rendered
+
+Each board below applies one preset to the **same fixed skeleton** — wordmark and positioning line, colour palette, type-scale specimen, abstract brand geometry, a low-fidelity product wireframe, a material swatch, a corner/edge study, a component specimen, and a one-line guardrail. The skeleton is identical so the presets can be compared side by side; everything else is the preset's own material and depth language — corner radius, shadow, translucency, texture, density, divider treatment, and the ink-to-whitespace ratio.
+
+![On Roster preset board](assets/showcase/presets/01-on-roster.png)
+
+**P1 · On Roster 在册名册** — *Registry form.* Tabular discipline, numbered rows, seal-red accent on uncoated paper. Almost no motion; everything reads as a registrable fact.
+
+![Blueprint preset board](assets/showcase/presets/02-blueprint.png)
+
+**P2 · Blueprint 工程图纸** — *Drafting drawing.* Engineering grid, drawing border, registration marks, dimension lines, title block. Precision is the aesthetic.
+
+![Marquee preset board](assets/showcase/presets/03-marquee.png)
+
+**P3 · Marquee 剧场场刊** — *Theatre programme.* Deep base with stage-light falloff, spotlight washes and long cast shadows; dramatic type-scale jumps carry the hierarchy.
+
+![Decision Desk preset board](assets/showcase/presets/04-decision-desk.png)
+
+**P4 · Decision Desk 决策编辑台** — *Editorial desk.* Warm paper surface, hairline rules, marginalia in the margin. Hierarchy comes from reading order, not container count.
+
+![Control Plane preset board](assets/showcase/presets/05-control-plane.png)
+
+**P5 · Control Plane 运营控制平面** — *Industrial console.* Matte enamel grain, machined edges, etched markings. Density is legitimate when it maps to real machinery.
+
+![Shared Atlas preset board](assets/showcase/presets/06-shared-atlas.png)
+
+**P6 · Shared Atlas 共享数据地图** — *Cartography.* Genuinely translucent layered planes, contour rings, soft elevation shading. Relationship is the primary content.
+
+![Lab Bench preset board](assets/showcase/presets/07-lab-bench.png)
+
+**P7 · Lab Bench 实验台** — *Laboratory record.* Graph paper as the substrate, ruled chart frames, precise tick marks. Every value shows its measurement.
+
+![Contract preset board](assets/showcase/presets/08-contract.png)
+
+**P8 · Contract 合同/勘验单** — *Instrument of record.* Bond paper tooth, hard edges, zero rounding, one physical seal impression. Nothing floats outside the document.
+
+![Atelier preset board](assets/showcase/presets/09-atelier.png)
+
+**P9 · Atelier 工坊** — *Warm human-scale craft.* Linen weave, soft diffused light, generously rounded panels. Warmth from proportion and material, not pastel haze.
+
+![Terminal Ledger preset board](assets/showcase/presets/10-terminal-ledger.png)
+
+**P10 · Terminal Ledger 终端账本** — *Running record.* Thermal-print dot-matrix texture, ledger ruling, tabular figures, one green/red pair for signed meaning only.
+
+> These boards are generated concept renders that illustrate each preset's direction. They are not production screenshots or evidence of guaranteed output quality.
+
 ## Repository structure
 
 ```text
 ultra-ui-skill/
-|-- SKILL.md                  Skill entrypoint and workflow router
-|-- agents/openai.yaml        Codex UI metadata
-|-- assets/showcase/          Generated Mosaic concept renders
-|-- references/               Creative direction, critic, and anti-AI guidance
-|-- evals/                    Baseline, with-skill results, and a visual fixture
-|-- README.md
+||-- SKILL.md                  Skill entrypoint and workflow router
+||-- README.md                 English documentation
+||-- README.zh-CN.md           Chinese documentation
+||-- agents/openai.yaml        Codex UI metadata
+||-- assets/showcase/          Mosaic concept renders
+||   `-- presets/              Ten preset style boards
+||-- references/               Style presets, creative direction, critic, and anti-AI guidance
+||-- evals/                    Baseline, with-skill results, and a visual fixture
 `-- LICENSE
 ```
 
